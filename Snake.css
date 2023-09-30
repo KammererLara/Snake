@@ -7,7 +7,7 @@ body {
 }
 
 .brett {
-    height: 15cm; width: 15cm;
+    height: 550px; width: 550px;
     border: black;
     border-style: solid;
     background-color: white;
@@ -17,7 +17,8 @@ body {
 }
 .head, .apfel, .body {
     font-size: xx-large;
-    height: 1cm; width: 1cm;
+    height: 50px; width: 50px;
     position: absolute;
+    top: 0; left: 0;
 
 }
