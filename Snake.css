@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: #6ae028;
+}
+
+.brett {
+    height: 15cm; width: 15cm;
+    border: black;
+    border-style: solid;
+    background-color: white;
+    position: relative;
+    left: 32%;
+
+}
+.head, .apfel, .body {
+    font-size: xx-large;
+    height: 1cm; width: 1cm;
+    position: absolute;
+
+}
