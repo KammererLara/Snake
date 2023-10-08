@@ -1,7 +1,11 @@
 const headEmoji = document.querySelector(".head");
 const bodyEmoji = document.querySelector(".body");
 const apfelEmoji = document.querySelector(".apfel");
-var elem = document.querySelector('body');
+const elem = document.querySelector("body");
+const gameover = document.querySelector(".gameover");
+const gameoverscore = document.querySelector(".gameoverscore");
+const score = document.querySelector(".score");
+const brett = document.querySelector(".brett");
 
 let apple = {
     x: 0,
@@ -20,10 +24,12 @@ let head = {
     direction: directions.down
 };
 
-let body = [];
+let body = {
+    parts: 0
+};
 
 
-let tempo = 0.5;
+let tempo = 0.3;
 
 let sectionCount = 15;
 const sectionsize = 500/sectionCount;
@@ -83,13 +89,20 @@ function moveSnake() {
     if (head.x<0 || head.x>sectionCount || head.y<0 || head.y>sectionCount) {
         console.log("clear");
         clearInterval(intervalId);
+        gameover.style.display="block";
+        gameoverscore.textContent = "Score: " + body.parts;
+        score.style.display="none";
+        headEmoji.style.display="none";
+        brett.style.display="none";
+        apfelEmoji.style.display="none";
     }
 
     if (head.x == apple.x && head.y == apple.y) {
         body.parts = body.parts+1;
+        score.textContent = "Score: " + body.parts;
         createApple();
         if (body.parts % 3 == 0) {
-            tempo = tempo-0.1;
+            tempo = tempo*0.5;
         }
     }
 }
