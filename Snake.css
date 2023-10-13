@@ -45,3 +45,8 @@ h1, .gameovertext, .gameoverscore, .score {
     position: absolute;
     left: 45%; top: 90%;
 }
+.body {
+    display: none;
+
+}
+
