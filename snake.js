@@ -18,6 +18,7 @@ const directions = {
     down: "ArrowDown",
     left: "ArrowLeft"
 };
+
 let head = {
     x: 0,
     y: 0,
@@ -25,26 +26,22 @@ let head = {
 };
 
 let body = [];
-
 let bodyEmojis = [];
 
 let newBodyPart = false;
 
-let bodypart = {
-    x: 0,
-    y: 0
+function bodypart() {
+    x = 0;
+    y = 0;
 };
-
 
 let tempo = 0.3;
 
 let sectionCount = 15;
 const sectionsize = 500/sectionCount;
-// const base = headEmoji.getBoundingClientRect();
 
 function createApple(){
     // console.log("create apple");
-
     apple.x = Math.floor(Math.random()*(sectionCount+1));
     apple.y = Math.floor(Math.random()*(sectionCount+1));
     apfelEmoji.style.left = `${apple.x*sectionsize}px`;
@@ -74,8 +71,8 @@ function changeDirection(event) {
 }
 
 function moveSnake() {
-    console.log("x: " + head.x);
-    console.log("y: " + head.y);
+    // console.log("x: " + head.x);
+    // console.log("y: " + head.y);
     for (let i=body.length -1; i > 0; i--) {
         body[i].x= body[i-1].x;
         body[i].y= body[i-1].y;
@@ -103,27 +100,40 @@ function moveSnake() {
     headEmoji.style.left = `${head.x*sectionsize}px`;
     headEmoji.style.top = `${head.y*sectionsize}px`;
 
-    for (let i = 0; i < body.length; i++) {
-        bodyEmojis[i].style.left = `${body[i].x*sectionsize}px`;
-        bodyEmojis[i].style.top = `${body[i].y*sectionsize}px`;
-    }
-
     if (newBodyPart == true ) {
         if (body.length == 1) {
             bodyEmojis.push(bodyEmoji);
             bodyEmoji.style.display= "block";
         } else if (body.length > 1){
-            bodyEmojis.push(bodyEmoji.cloneNode())
+            bodyEmojis.push(bodyEmoji.cloneNode(true));
         }
-        bodyEmoji.style.top= `${body[0].y*sectionsize}px`;
-        bodyEmoji.style.left= `${body[0].x*sectionsize}px`;
-        console.log("x="+ body[0].x + " , y= " + body[0].y);
+        // bodyEmoji.style.top= `${body[0].y*sectionsize}px`;
+        // bodyEmoji.style.left= `${body[0].x*sectionsize}px`;
         newBodyPart = false;
     }
 
+    for (let i = 0; i < bodyEmojis.length; i++) {
+        bodyEmojis[i].style.left = `${body[i].x*sectionsize}px`;
+        bodyEmojis[i].style.top = `${body[i].y*sectionsize}px`;
+        brett.appendChild(bodyEmojis[i]);
+        bodyEmojis[i].style.display = "block";
+    }
+    if (body.length > 0)
+        console.log(body);
+    if (bodyEmojis.length > 0)
+        console.log(bodyEmojis);
+
     //Wenn man stirbt
-    if (head.x<0 || head.x>sectionCount || head.y<0 || head.y>sectionCount) {
-        console.log("clear");
+    let snakeEatsBorder = head.x<0 || head.x>sectionCount || head.y<0 || head.y>sectionCount;
+    let snakeEatsItself = false;
+    for (let i = 0; i < body.length; i++) {
+        if (body[i].x == head.x && body[i].y == head.y) {
+            snakeEatsItself = true;
+            break;
+        }
+    }
+    if (snakeEatsBorder || snakeEatsItself) {
+        // console.log("clear");
         clearInterval(intervalId);
         gameover.style.display="block";
         gameoverscore.textContent = "Score: " + body.length;
@@ -131,22 +141,19 @@ function moveSnake() {
         headEmoji.style.display="none";
         brett.style.display="none";
         apfelEmoji.style.display="none";
+        snakeEatsItself = false;
     }
 
     //Wenn man Apfel frisst
     if (head.x == apple.x && head.y == apple.y) {
-       // body.parts = body.parts+1;
         createApple();
-        body.push(bodypart);
-        console.log(body)
-        //if (body.length == 1) {
-          newBodyPart= true;
-      //  }
-
+        body.push(new bodypart);
+        // console.log(body)
+        newBodyPart= true;
         score.textContent = "Score: " + body.length;
-        if (body.length % 3 == 0) {
-            tempo = tempo*0.5;
-        }
+        // if (body.length % 3 == 0) {
+        //     tempo = tempo*0.5;
+        // }
     }
 }
 let intervalId = setInterval(function() {
