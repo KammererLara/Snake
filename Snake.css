@@ -9,44 +9,58 @@ body {
     background-color: white;
     position: relative;
     left: 31.5%;
-
 }
+
 .head, .apfel, .body {
     font-size: xx-large;
     /*height: 50px; width: 50px;*/
     position: absolute;
     top: 0; left: 0;
-
 }
+
 .gameover {
     background-color: #fa0000;
-    height: 350px; width: 1200px;
+    height: 450px; width: 1200px;
     position: absolute;
     left: 10%; top: 25%;
     border: black;
     border-style: solid;
     display: none;
 }
-h1, .gameovertext, .gameoverscore, .score {
+
+h1, .gameovertext, .gameoverscore, .score, .restart {
     text-align: center;
     font-weight: bold;
     font-family: "Comic Sans MS";
 }
+
 .gameoverscore {
     font-size: 80px;
     heigth: 100px;
 }
+
 .gameovertext {
     font-size: 170px;
     height: 200px;
 }
+
 .score {
     font-size: 30px;
     position: absolute;
     left: 45%; top: 90%;
 }
+
 .body {
     display: none;
-
 }
 
+.restart {
+    background-color: cadetblue;
+    height: 100px; width: 400px;
+    border: black;
+    border-style: solid;
+    position: relative;
+    left: 34%;
+    font-size: 80px;
+    height: 115px;
+}
