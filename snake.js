@@ -51,8 +51,11 @@ function createApple(){
         }
     }
 
+    console.log(`New apple at: ${apple.x}, ${apple.y}`);
     apfelEmoji.style.left = `${apple.x*sectionsize}px`;
     apfelEmoji.style.top = `${apple.y*sectionsize}px`;
+    console.log("Created Apfelemoji at:");
+    console.log(apfelEmoji);
 }
 
 function changeDirection(event) {
@@ -101,6 +104,7 @@ function moveSnake() {
             head.y = head.y+1;
             break;
     }
+
     headEmoji.style.left = `${head.x*sectionsize}px`;
     headEmoji.style.top = `${head.y*sectionsize}px`;
 
@@ -121,10 +125,11 @@ function moveSnake() {
         bodyEmojis[i].style.display = "block";
     }
 
-    //if (body.length > 0)
-       // console.log(body);
+    console.log(`Head: ${head.x}, ${head.y}, ${head.direction}`);
+    if (body.length > 0)
+        console.log(body);
     //if (bodyEmojis.length > 0)
-        //console.log(bodyEmojis);
+    //    console.log(bodyEmojis);
 
     //Wenn man stirbt
     let snakeEatsBorder = head.x<0 || head.x>sectionCount || head.y<0 || head.y>sectionCount;
@@ -147,6 +152,7 @@ function moveSnake() {
 
     //Wenn man Apfel frisst
     if (head.x == apple.x && head.y == apple.y) {
+        console.log(`Ate apple at: ${head.x}, ${head.y}`);
         createApple();
         body.push(new bodypart);
         newBodyPart= true;
