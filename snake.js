@@ -1,11 +1,11 @@
 const headEmoji = document.querySelector(".head");
 const bodyEmoji = document.querySelector(".body");
-const apfelEmoji = document.querySelector(".apfel");
+const appleEmoji = document.querySelector(".apple");
 const elem = document.querySelector("body");
 const gameover = document.querySelector(".gameover");
 const gameoverscore = document.querySelector(".gameoverscore");
 const score = document.querySelector(".score");
-const brett = document.querySelector(".brett");
+const board = document.querySelector(".board");
 const restart = document.querySelector(".restart");
 
 let difficulty = "intermediate";
@@ -14,7 +14,7 @@ let sectionCount;
 switch (difficulty) {
     case "easy":
         sectionCount = 20;
-        apfelEmoji.style.fontSize = "x-large";
+        appleEmoji.style.fontSize = "x-large";
         headEmoji.style.fontSize = "x-large";
         bodyEmoji.style.fontSize = "x-large";
         break;
@@ -71,10 +71,10 @@ function createApple(){
     }
 
     console.log(`New apple at: ${apple.x}, ${apple.y}`);
-    apfelEmoji.style.left = `${apple.x*sectionsize}px`;
-    apfelEmoji.style.top = `${apple.y*sectionsize}px`;
-    console.log("Created Apfelemoji at:");
-    console.log(apfelEmoji);
+    appleEmoji.style.left = `${apple.x*sectionsize}px`;
+    appleEmoji.style.top = `${apple.y*sectionsize}px`;
+    console.log("Created Appleemoji at:");
+    console.log(appleEmoji);
 }
 
 function changeDirection(event) {
@@ -140,7 +140,7 @@ function moveSnake() {
     for (let i = 0; i < bodyEmojis.length; i++) {
         bodyEmojis[i].style.left = `${body[i].x*sectionsize}px`;
         bodyEmojis[i].style.top = `${body[i].y*sectionsize}px`;
-        brett.appendChild(bodyEmojis[i]);
+        board.appendChild(bodyEmojis[i]);
         bodyEmojis[i].style.display = "block";
     }
 
@@ -165,8 +165,8 @@ function moveSnake() {
         gameoverscore.textContent = "Score: " + body.length;
         score.style.display="none";
         headEmoji.style.display="none";
-        brett.style.display="none";
-        apfelEmoji.style.display="none";
+        board.style.display="none";
+        appleEmoji.style.display="none";
     }
 
     //Wenn man Apfel frisst
@@ -184,7 +184,6 @@ function moveSnake() {
     }
 }
 
-// alle 3 Sekunden ausführen
 let intervalId = setInterval(moveSnake, tempo*1000);
 
 function toRestart () {

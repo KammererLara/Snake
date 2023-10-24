@@ -2,7 +2,7 @@ body {
     background-color: #6ae028;
 }
 
-.brett {
+.board {
     height: 550px; width: 550px;
     border: black;
     border-style: solid;
@@ -11,7 +11,7 @@ body {
     left: 31.5%;
 }
 
-.head, .apfel, .body {
+.head, .apple, .body {
     font-size: xx-large;
     /*height: 50px; width: 50px;*/
     position: absolute;
