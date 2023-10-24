@@ -8,6 +8,24 @@ const score = document.querySelector(".score");
 const brett = document.querySelector(".brett");
 const restart = document.querySelector(".restart");
 
+let difficulty = "intermediate";
+let sectionCount;
+
+switch (difficulty) {
+    case "easy":
+        sectionCount = 20;
+        apfelEmoji.style.fontSize = "x-large";
+        headEmoji.style.fontSize = "x-large";
+        bodyEmoji.style.fontSize = "x-large";
+        break;
+    case "intermediate":
+        sectionCount = 15;
+        break;
+    case "hard":
+        sectionCount = 10;
+        break;
+}
+
 let apple = {
     x: 0,
     y: 0
@@ -38,12 +56,11 @@ function bodypart() {
 
 let tempo = 0.3;
 
-let sectionCount = 15;
-const sectionsize = 500/sectionCount;
+const sectionsize = 500/(sectionCount-1);
 
 function createApple(){
-    apple.x = Math.floor(Math.random()*(sectionCount+1));
-    apple.y = Math.floor(Math.random()*(sectionCount+1));
+    apple.x = Math.floor(Math.random()*(sectionCount));
+    apple.y = Math.floor(Math.random()*(sectionCount));
 
     if (head.x == apple.x && head.y == apple.y)
         createApple();
@@ -134,7 +151,7 @@ function moveSnake() {
     //    console.log(bodyEmojis);
 
     //Wenn man stirbt
-    let snakeEatsBorder = head.x<0 || head.x>sectionCount || head.y<0 || head.y>sectionCount;
+    let snakeEatsBorder = head.x<0 || head.x>=sectionCount || head.y<0 || head.y>=sectionCount;
     let snakeEatsItself = false;
     for (let i = 0; i < body.length; i++) {
         if (body[i].x == head.x && body[i].y == head.y) {
@@ -159,15 +176,16 @@ function moveSnake() {
         body.push(new bodypart);
         newBodyPart= true;
         score.textContent = "Score: " + body.length;
-        // if (body.length % 3 == 0) {
-        //     tempo = tempo*0.5;
-        // }
+        if (body.length % 3 == 0) {
+            tempo = tempo*0.9;
+            clearInterval(intervalId);
+            intervalId = setInterval(moveSnake, tempo*1000);
+        }
     }
 }
-let intervalId = setInterval(function() {
-    // alle 3 Sekunden ausführen
-    moveSnake();
-}, tempo*1000);
+
+// alle 3 Sekunden ausführen
+let intervalId = setInterval(moveSnake, tempo*1000);
 
 function toRestart () {
     location.reload();
@@ -176,4 +194,3 @@ function toRestart () {
 createApple();
 elem.addEventListener("keydown", changeDirection);
 restart.addEventListener("click", toRestart);
-
