@@ -22,7 +22,7 @@ body {
     background-color: #fa0000;
     height: 450px; width: 1200px;
     position: absolute;
-    left: 10%; top: 25%;
+    left: 10%; top: 20%;
     border: black;
     border-style: solid;
     display: none;

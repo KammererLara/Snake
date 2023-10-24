@@ -45,6 +45,8 @@ function createApple(){
     apple.x = Math.floor(Math.random()*(sectionCount+1));
     apple.y = Math.floor(Math.random()*(sectionCount+1));
 
+    if (head.x == apple.x && head.y == apple.y)
+        createApple();
     for (let i = 0; i< body.length; i++ ) {
         if (body[i].x == apple.x && body[i].y == apple.y) {
             createApple();
