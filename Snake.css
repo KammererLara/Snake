@@ -46,8 +46,6 @@ h1, .gameovertext, .gameoverscore, .score, .restart {
 
 .score {
     font-size: 30px;
-    position: relative;
-    left: 0%; top: 15%;
 }
 
 .body {
